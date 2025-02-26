@@ -3,93 +3,57 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Do You Love Saksham?</title>
-    <style>
-        body {
-            text-align: center;
-            font-family: Arial, sans-serif;
-            background-color: #ffe6f2;
-            margin: 0;
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-        }
-        h1 {
-            color: #ff3399;
-            font-size: 60px;
-            font-weight: bold;
-            margin-bottom: 40px;
-        }
-        .button-container {
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-            margin-bottom: 20px;
-        }
-        button {
-            padding: 20px 50px;
-            font-size: 24px;
-            cursor: pointer;
-            border: none;
-            border-radius: 10px;
-        }
-        #yesBtn, #yesBtn2 {
-            background-color: #66ff66;
-        }
-        #noBtn, #noBtn2 {
-            background-color: #ff6666;
-        }
-        #response1, #response2 {
-            font-size: 60px;
-            color: #ff3399;
-            font-weight: bold;
-            margin-top: 20px;
-        }
-        #puppy2, #congratsGif {
-            margin: 20px auto;
-            width: 400px;
-        }
-        #resetBtn {
-            padding: 15px 30px;
-            font-size: 20px;
-            margin-top: 20px;
-            background-color: #9999ff;
-            border: none;
-            border-radius: 10px;
-            cursor: pointer;
-        }
-    </style>
+    <title>Siricha, Do You Love Saksham?</title>
 </head>
-<body>
-    <h1>Siricha, do You Love Saksham?</h1>
-    <div class="button-container">
-        <button id="yesBtn" onclick="showProposal()">Yes</button>
-        <button id="noBtn" onmouseover="showResponse1()">No</button>
+<body style="text-align: center; font-family: Arial, sans-serif; background-color: #ffe6f2; margin: 0; min-height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center;">
+    <h1 style="color: #ff3399; font-size: 60px; font-weight: bold; margin-bottom: 40px;">Siricha, Do You Love Saksham?</h1>
+    <div style="display: flex; justify-content: center; gap: 20px; margin-bottom: 20px;">
+        <button id="yesBtn" onclick="showProposal()" style="padding: 20px 50px; font-size: 24px; cursor: pointer; border: none; border-radius: 10px; background-color: #66ff66;">Yes</button>
+        <button id="noBtn" onmouseover="showResponse1()" style="padding: 20px 50px; font-size: 24px; cursor: pointer; border: none; border-radius: 10px; background-color: #ff9999; color: white;">No</button>
     </div>
-    <div id="response1" style="display: none;"></div>
+    <div id="response1" style="font-size: 60px; color: #ff3399; font-weight: bold; margin-top: 20px; display: none;"></div>
 
-    <h1 id="proposal" style="display: none;">Will You Marry Me, Siricha?</h1>
-    <div id="buttonContainer2" class="button-container" style="display: none;">
-        <button id="yesBtn2" onclick="showFinalResponse()">Yes</button>
-        <button id="noBtn2" onmouseover="showPuppy2()">No</button>
+    <h1 id="proposal" style="color: #ff3399; font-size: 60px; font-weight: bold; margin-bottom: 40px; display: none;">Will You Marry Me, Siricha?</h1>
+    <div id="buttonContainer2" style="display: flex; justify-content: center; gap: 20px; margin-bottom: 20px; display: none;">
+        <button id="yesBtn2" onclick="showFinalResponse()" style="padding: 20px 50px; font-size: 24px; cursor: pointer; border: none; border-radius: 10px; background-color: #66ff66;">Yes</button>
+        <button id="noBtn2" onclick="handleNoClick()" style="padding: 20px 50px; font-size: 24px; cursor: pointer; border: none; border-radius: 10px; background-color: #ff6666; color: white; position: absolute; left: 60%; top: 200px; transform: translateX(-50%);">No</button>
     </div>
-    <img id="puppy2" src="https://media.giphy.com/media/e1Tf1eOo6976zuGv3C/giphy.gif" alt="Kawaii Mochi Cat Begging" width="400" style="display: none;">
-    <div id="response2" style="display: none;"></div>
-    <img id="congratsGif" src="https://media.giphy.com/media/osjgQPWRx3cac/giphy.gif" alt="Waving Cat Sticker" width="400" style="display: none;">
-    <button id="resetBtn" style="display: none;" onclick="resetPage()">Reset</button>
+    <img id="puppy2" src="https://media.giphy.com/media/e1Tf1eOo6976zuGv3C/giphy.gif" alt="Kawaii Mochi Cat Begging" width="400" style="margin: 20px auto; display: none;">
+    <img id="secondPuppy" src="https://media.giphy.com/media/INpSRHmLbHgh3Edsru/giphy.gif" alt="Shroomy Pleaseee GIF" width="400" style="margin: 20px auto; display: none;">
+    <img id="thirdPuppy" src="https://media.giphy.com/media/los0R5UJA9bOuTmK7t/giphy.gif" alt="Cute Please GIF" width="400" style="margin: 20px auto; display: none;">
+    <div id="response2" style="font-size: 60px; color: #ff3399; font-weight: bold; margin-top: 20px; display: none;"></div>
+    <img id="congratsGif" src="https://media.giphy.com/media/osjgQPWRx3cac/giphy.gif" alt="Waving Cat Sticker" width="400" style="margin: 20px auto; display: none;">
+    <button id="resetBtn" onclick="resetPage()" style="padding: 15px 30px; font-size: 20px; margin-top: 20px; background-color: #9999ff; border: none; border-radius: 10px; cursor: pointer; display: none;">Reset</button>
 
     <script>
+        let noClickCount = 0;
+
         function showResponse1() {
             document.getElementById('response1').style.display = 'block';
             document.getElementById('response1').innerHTML = 'Please say Yes!';
             document.getElementById('noBtn').innerText = 'Please say Yes!';
         }
 
-        function showPuppy2() {
-            document.getElementById('puppy2').style.display = 'block';
-            document.getElementById('noBtn2').innerText = 'Please say Yes!';
+        function handleNoClick() {
+            noClickCount++;
+            if (noClickCount === 1) {
+                document.getElementById('puppy2').style.display = 'block';
+                document.getElementById('noBtn2').style.top = '250px';
+                document.getElementById('noBtn2').style.left = '60%';
+            } else if (noClickCount === 2) {
+                document.getElementById('secondPuppy').style.display = 'block';
+                document.getElementById('puppy2').style.display = 'none';
+                document.getElementById('noBtn2').style.top = '300px';
+                document.getElementById('noBtn2').style.left = '60%';
+            } else if (noClickCount === 3) {
+                document.getElementById('thirdPuppy').style.display = 'block';
+                document.getElementById('secondPuppy').style.display = 'none';
+                document.getElementById('noBtn2').innerText = 'Please say Yes!';
+                document.getElementById('noBtn2').style.top = '350px';
+                document.getElementById('noBtn2').style.left = '60%';
+                document.getElementById('noBtn2').style.position = 'absolute';
+                document.getElementById('noBtn2').style.transform = 'translateX(-50%)';
+            }
         }
 
         function showProposal() {
@@ -98,7 +62,18 @@
             document.getElementById('yesBtn').style.display = 'none';
             document.getElementById('noBtn').style.display = 'none';
             document.getElementById('response1').style.display = 'none';
-            document.querySelector('h1:not(#proposal)').style.display = 'none'; // Hide "Do You Love Saksham?"
+            document.querySelector('h1:not(#proposal)').style.display = 'none'; // Hide "Siricha, Do You Love Saksham?"
+            noClickCount = 0; // Reset counter for new interaction
+            const noButton = document.getElementById('noBtn2');
+            noButton.style.display = 'block';
+            noButton.style.position = 'absolute';
+            noButton.style.top = '200px';
+            noButton.style.left = '60%';
+            noButton.style.transform = 'translateX(-50%)';
+            noButton.innerText = 'No';
+            document.getElementById('puppy2').style.display = 'none';
+            document.getElementById('secondPuppy').style.display = 'none';
+            document.getElementById('thirdPuppy').style.display = 'none';
         }
 
         function showFinalResponse() {
@@ -107,6 +82,8 @@
             document.getElementById('proposal').style.display = 'none';
             document.getElementById('buttonContainer2').style.display = 'none';
             document.getElementById('puppy2').style.display = 'none';
+            document.getElementById('secondPuppy').style.display = 'none';
+            document.getElementById('thirdPuppy').style.display = 'none';
             document.getElementById('congratsGif').style.display = 'block';
             document.getElementById('resetBtn').style.display = 'block';
         }
@@ -115,6 +92,8 @@
             document.getElementById('proposal').style.display = 'none';
             document.getElementById('buttonContainer2').style.display = 'none';
             document.getElementById('puppy2').style.display = 'none';
+            document.getElementById('secondPuppy').style.display = 'none';
+            document.getElementById('thirdPuppy').style.display = 'none';
             document.getElementById('response2').style.display = 'none';
             document.getElementById('response2').innerHTML = '';
             document.getElementById('congratsGif').style.display = 'none';
@@ -123,7 +102,15 @@
             document.getElementById('noBtn').style.display = 'block';
             document.getElementById('response1').style.display = 'none';
             document.getElementById('noBtn').innerText = 'No';
-            document.querySelector('h1:not(#proposal)').style.display = 'block'; // Show "Do You Love Saksham?" again
+            document.querySelector('h1:not(#proposal)').style.display = 'block'; // Show "Siricha, Do You Love Saksham?" again
+            noClickCount = 0; // Reset no click counter
+            const noButton = document.getElementById('noBtn2');
+            noButton.style.display = 'none';
+            noButton.style.position = 'absolute';
+            noButton.style.top = '200px';
+            noButton.style.left = '60%';
+            noButton.style.transform = 'translateX(-50%)';
+            noButton.innerText = 'No';
         }
     </script>
 </body>
